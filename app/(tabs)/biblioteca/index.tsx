@@ -1,6 +1,5 @@
-import { View, StyleSheet, Text, ScrollView, Pressable } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Link } from "expo-router";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function biblioteca() {
   const categorias = [
@@ -32,10 +31,6 @@ export default function biblioteca() {
           ))}
         </View>
       </ScrollView>
-
-      <Pressable style={styles.addButton}>
-        <Ionicons name="add-circle-sharp" size={90} color="black" />
-      </Pressable>
     </>
   );
 }
@@ -59,16 +54,6 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 10,
     padding: 20,
-  },
-  addButton: {
-    position: "absolute",
-    //backgroundColor: "yellow",
-    width: 83,
-    height: 83,
-    bottom: 35,
-    right: 20,
-    alignItems: "center",
-    justifyContent: "center",
   },
   text: {
     fontSize: 20,

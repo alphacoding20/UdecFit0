@@ -1,5 +1,5 @@
-import { StyleSheet, Text, FlatList, Pressable } from "react-native";
-import { useGlobalSearchParams, Link } from "expo-router";
+import { Link, useGlobalSearchParams } from "expo-router";
+import { FlatList, Pressable, StyleSheet, Text } from "react-native";
 
 import { ejercicios } from "./datos";
 

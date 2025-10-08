@@ -9,12 +9,22 @@ import {
   Text,
   View,
 } from "react-native";
+import { v4 as uuidv4 } from "uuid";
 import { ppl, torsoPierna } from "./biblioteca/datos";
+
+//Este tipe sirve para especificar lo que hay que pasar al crear la rutina
+type Rutina = {
+  id: string;
+  nombre: string;
+  dias: number;
+  esquema: any[];
+  detalle: any[];
+};
 
 //Función principal
 export default function Rutinas() {
   //Almacenamiento de rutinas
-  let rutinasCreadas = [];
+  const [rutinasCreadas, setRutinasCreadas] = useState<Rutina[]>([]);
   let esquemaRutina = [];
   let detalleRutina: { dia: string; rutina: string[] }[] = [
     { dia: "Lunes", rutina: [] },
@@ -26,94 +36,128 @@ export default function Rutinas() {
     { dia: "Domingo", rutina: [] },
   ];
   const opcionesDias = [4, 6]; //Arreglo con los días de la semana a entrenar
-  let diasSeleccionados = null;
 
-  //Formulario para crear rutina usando componente Modal
+  //Variables de estado para crear el Modal
   const [modalVisible, setModalVisible] = useState(false);
 
-  //En caso de no haber rutinas
-  if (rutinasCreadas.length === 0) {
-    return (
-      <>
-        <ScrollView contentContainerStyle={styles.container}>
-          <View style={styles.container}>
-            <Text>Tus rutinas aparecerán aquí</Text>
-          </View>
-        </ScrollView>
+  //FUNCIONES CREACIÓN DE RUTINA
+  //Función de selección de días al elegir una opción
+  const seleccionDias = (dias: number) => {
+    switch (dias) {
+      case 4:
+        esquemaRutina = torsoPierna;
+        detalleRutina[0].rutina = torsoPierna[0].rutina;
+        detalleRutina[1].rutina = torsoPierna[1].rutina;
+        detalleRutina[3].rutina = torsoPierna[2].rutina;
+        detalleRutina[4].rutina = torsoPierna[3].rutina;
+        const nuevoId4 = uuidv4();
+        const rutina4Dias: Rutina = {
+          id: nuevoId4,
+          nombre: "TORSO-PIERNA",
+          dias: 4,
+          esquema: esquemaRutina,
+          detalle: detalleRutina,
+        };
+        setRutinasCreadas((prevRutinas) => [...prevRutinas, rutina4Dias]);
+        break;
+      case 6:
+        esquemaRutina = ppl;
+        detalleRutina[0].rutina = ppl[0].rutina;
+        detalleRutina[1].rutina = ppl[1].rutina;
+        detalleRutina[2].rutina = ppl[2].rutina;
+        detalleRutina[3].rutina = ppl[3].rutina;
+        detalleRutina[4].rutina = ppl[4].rutina;
+        detalleRutina[5].rutina = ppl[5].rutina;
+        const nuevoId6 = uuidv4();
+        const rutina6Dias: Rutina = {
+          id: nuevoId6,
+          nombre: "EMPUJE/JALE/PIERNA",
+          dias: 6,
+          esquema: esquemaRutina,
+          detalle: detalleRutina,
+        };
+        setRutinasCreadas((prevRutinas) => [...prevRutinas, rutina6Dias]);
+        break;
+    }
+    setModalVisible(false);
+  };
 
-        <Pressable
-          style={styles.addButton}
-          onPress={() => setModalVisible(true)}
-        >
-          <Ionicons name="add-circle-sharp" size={90} color="black" />
-        </Pressable>
-
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(false);
-          }}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalTitle}>
-                ¿Cuántos días a la semana quieres entrenar?
-              </Text>
-              {opcionesDias.map((dia) => (
-                <Pressable
-                  style={styles.modalButtons}
-                  key={dia}
-                  onPress={() => {
-                    diasSeleccionados = dia;
-                    console.log(diasSeleccionados);
-                    switch (diasSeleccionados) {
-                      case 4:
-                        esquemaRutina = torsoPierna;
-                        detalleRutina[0].rutina = torsoPierna[0].rutina;
-                        detalleRutina[1].rutina = torsoPierna[1].rutina;
-                        detalleRutina[3].rutina = torsoPierna[2].rutina;
-                        detalleRutina[4].rutina = torsoPierna[3].rutina;
-                        console.log("Rutina torso-pierna:\n", esquemaRutina);
-                        console.log(
-                          "Tu entrenamiento semanal:\n",
-                          detalleRutina
-                        );
-                        break;
-                      case 6:
-                        esquemaRutina = ppl;
-                        detalleRutina[0].rutina = ppl[0].rutina;
-                        detalleRutina[1].rutina = ppl[1].rutina;
-                        detalleRutina[2].rutina = ppl[2].rutina;
-                        detalleRutina[3].rutina = ppl[3].rutina;
-                        detalleRutina[4].rutina = ppl[4].rutina;
-                        detalleRutina[5].rutina = ppl[5].rutina;
-                        console.log("Rutina ppl:\n", esquemaRutina);
-                        console.log(
-                          "Tu entrenamiento semanal:\n",
-                          detalleRutina
-                        );
-                        break;
-                    }
-                  }}
-                >
-                  <Text>{dia}</Text>
+  return (
+    <>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={
+          rutinasCreadas.length === 0 ? styles.scrollVacio : undefined
+        }
+      >
+        {rutinasCreadas.length > 0 ? (
+          rutinasCreadas.map((rutina) => (
+            <>
+              <View style={styles.container}>
+                <Pressable style={styles.card} key={rutina.id}>
+                  <Text style={styles.cardTitle}>{rutina.nombre}</Text>
+                  <Text style={styles.cardText}>{rutina.dias}dias</Text>
                 </Pressable>
-              ))}
+              </View>
+            </>
+          ))
+        ) : (
+          <>
+            <View style={styles.containerVacio}>
+              <Text>Aquí puedes ver tus rutinas</Text>
             </View>
+          </>
+        )}
+      </ScrollView>
+
+      <Pressable style={styles.addButton} onPress={() => setModalVisible(true)}>
+        <Ionicons name="add-circle-sharp" size={90} color="black" />
+      </Pressable>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalTitle}>
+              ¿Cuántos días a la semana quieres entrenar?
+            </Text>
+            {opcionesDias.map((dias) => (
+              <Pressable
+                style={styles.modalButtons}
+                key={dias}
+                onPress={() => seleccionDias(dias)}
+              >
+                <Text>{dias}</Text>
+              </Pressable>
+            ))}
           </View>
-        </Modal>
-      </>
-    );
-  } else {
-    return {};
-  }
+        </View>
+      </Modal>
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
+  scroll: {
+    flex: 1,
+  },
+  scrollVacio: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+  },
+  containerVacio: {
     alignItems: "center",
     justifyContent: "center",
   },
@@ -146,5 +190,23 @@ const styles = StyleSheet.create({
     margin: 10,
     marginLeft: 20,
     marginBottom: 20,
+  },
+
+  //Estilos rutinas
+  card: {
+    backgroundColor: "#807d7d",
+    margin: 18,
+    marginBottom: 0,
+    width: "90%",
+    height: 100,
+    borderRadius: 10,
+    padding: 20,
+  },
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  cardText: {
+    fontSize: 20,
   },
 });

@@ -1,7 +1,7 @@
 import { Tabs } from "expo-router";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export default function TabLayout() {
@@ -9,7 +9,7 @@ export default function TabLayout() {
     <>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: "green",
+          tabBarActiveTintColor: "#76B82A",
           tabBarStyle: {
             backgroundColor: "white",
           },

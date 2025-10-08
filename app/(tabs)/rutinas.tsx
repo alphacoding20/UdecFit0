@@ -92,26 +92,24 @@ export default function Rutinas() {
       >
         {rutinasCreadas.length > 0 ? (
           rutinasCreadas.map((rutina) => (
-            <>
-              <View style={styles.container}>
-                <Pressable style={styles.card} key={rutina.id}>
-                  <Text style={styles.cardTitle}>{rutina.nombre}</Text>
-                  <Text style={styles.cardText}>{rutina.dias}dias</Text>
-                </Pressable>
-              </View>
-            </>
+            <View style={styles.container} key={rutina.id}>
+              <Pressable style={styles.card}>
+                <Text style={styles.cardTitle}>{rutina.nombre}</Text>
+                <Text style={styles.cardText}>{rutina.dias} dias</Text>
+              </Pressable>
+            </View>
           ))
         ) : (
-          <>
-            <View style={styles.containerVacio}>
-              <Text>Aquí puedes ver tus rutinas</Text>
-            </View>
-          </>
+          <View style={styles.containerVacio}>
+            <Text style={styles.textoContainerVacio}>
+              Aquí puedes ver tus rutinas
+            </Text>
+          </View>
         )}
       </ScrollView>
 
       <Pressable style={styles.addButton} onPress={() => setModalVisible(true)}>
-        <Ionicons name="add-circle-sharp" size={90} color="black" />
+        <Ionicons name="add-circle-sharp" size={90} color="#76B82A" />
       </Pressable>
 
       <Modal
@@ -133,7 +131,7 @@ export default function Rutinas() {
                 key={dias}
                 onPress={() => seleccionDias(dias)}
               >
-                <Text>{dias}</Text>
+                <Text style={styles.modalButtonText}>{dias}</Text>
               </Pressable>
             ))}
           </View>
@@ -146,30 +144,47 @@ export default function Rutinas() {
 const styles = StyleSheet.create({
   scroll: {
     flex: 1,
+    backgroundColor: "#111111",
   },
   scrollVacio: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#111111",
   },
   container: {
-    flex: 1,
+    //flex: 1,
     alignItems: "flex-start",
     justifyContent: "flex-start",
   },
   containerVacio: {
     alignItems: "center",
     justifyContent: "center",
+    padding: 20,
+  },
+  textoContainerVacio: {
+    color: "#A9A9A9", // Gris claro para el texto
+    fontSize: 18,
   },
   addButton: {
     position: "absolute",
-    //backgroundColor: "yellow",
-    width: 83,
-    height: 83,
-    bottom: 35,
+    // backgroundColor: "#007AFF",
+    // width: 85,
+    // height: 85,
+    // borderRadius: 42.5,
+    bottom: 30,
     right: 20,
     alignItems: "center",
     justifyContent: "center",
+
+    //Sombra IOS
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
+
+    //Sombra Android
+    elevation: 12,
   },
 
   //Estilos del Modal
@@ -177,36 +192,74 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    //backgroundColor: "white",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   modalView: {
     backgroundColor: "white",
+    borderRadius: 20, // Más suave
+    padding: 25,
+    width: "80%", // Ocupa un buen ancho
+    alignItems: "center", // Centra el contenido
   },
   modalTitle: {
-    margin: 10,
+    marginBottom: 20,
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#1A1A1A",
   },
   modalButtons: {
-    margin: 10,
-    marginLeft: 20,
-    marginBottom: 20,
+    backgroundColor: "#E0E0E0",
+    width: "100%",
+    padding: 15,
+    borderRadius: 10,
+    marginVertical: 8,
+    alignItems: "center",
   },
-
+  modalButtonText: {},
   //Estilos rutinas
   card: {
-    backgroundColor: "#807d7d",
-    margin: 18,
-    marginBottom: 0,
+    // backgroundColor: "#2C2C2C",
+    // margin: 18,
+    // marginBottom: 0,
+    // width: "90%",
+    // height: 100,
+    // borderRadius: 10,
+    // padding: 20,
+
+    backgroundColor: "#2C2C2C",
+    marginHorizontal: 20,
+    marginTop: 20,
     width: "90%",
-    height: 100,
-    borderRadius: 10,
+    height: 120,
+    borderRadius: 15,
+
+    //Sombra IOS
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    //Sombra Android
+    elevation: 8,
+
     padding: 20,
+    justifyContent: "center", // Centra verticalmente el contenido
   },
   cardTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
+    // fontSize: 20,
+    // fontWeight: "bold",
+    // color: "#FFFFFF",
+
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#FFFFFF",
+    marginBottom: 5,
   },
   cardText: {
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: "500",
+    //color: "#007AFF",
+    color: "#76B82A",
   },
 });

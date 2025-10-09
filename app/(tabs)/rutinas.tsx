@@ -10,7 +10,12 @@ import {
   View,
 } from "react-native";
 import { v4 as uuidv4 } from "uuid";
-import { ppl, torsoPierna } from "./biblioteca/datos";
+import {
+  fullBody,
+  ppl,
+  torsoPierna,
+  torsoPierna_ppl,
+} from "./biblioteca/datos";
 
 //Este tipe sirve para especificar lo que hay que pasar al crear la rutina
 type Rutina = {
@@ -35,7 +40,7 @@ export default function Rutinas() {
     { dia: "Sábado", rutina: [] },
     { dia: "Domingo", rutina: [] },
   ];
-  const opcionesDias = [4, 6]; //Arreglo con los días de la semana a entrenar
+  const opcionesDias = [3, 4, 5, 6]; //Arreglo con los días de la semana a entrenar
 
   //Variables de estado para crear el Modal
   const [modalVisible, setModalVisible] = useState(false);
@@ -44,12 +49,27 @@ export default function Rutinas() {
   //Función de selección de días al elegir una opción
   const seleccionDias = (dias: number) => {
     switch (dias) {
+      case 3:
+        esquemaRutina = fullBody;
+        detalleRutina[0].rutina = fullBody[0].rutina;
+        detalleRutina[1].rutina = fullBody[1].rutina;
+        detalleRutina[2].rutina = fullBody[2].rutina;
+        const nuevoId3 = uuidv4();
+        const rutina3Dias: Rutina = {
+          id: nuevoId3,
+          nombre: "FULLBODY",
+          dias: 3,
+          esquema: esquemaRutina,
+          detalle: detalleRutina,
+        };
+        setRutinasCreadas((prevRutinas) => [...prevRutinas, rutina3Dias]);
+        break;
       case 4:
         esquemaRutina = torsoPierna;
         detalleRutina[0].rutina = torsoPierna[0].rutina;
         detalleRutina[1].rutina = torsoPierna[1].rutina;
-        detalleRutina[3].rutina = torsoPierna[2].rutina;
-        detalleRutina[4].rutina = torsoPierna[3].rutina;
+        detalleRutina[2].rutina = torsoPierna[2].rutina;
+        detalleRutina[3].rutina = torsoPierna[3].rutina;
         const nuevoId4 = uuidv4();
         const rutina4Dias: Rutina = {
           id: nuevoId4,
@@ -59,6 +79,23 @@ export default function Rutinas() {
           detalle: detalleRutina,
         };
         setRutinasCreadas((prevRutinas) => [...prevRutinas, rutina4Dias]);
+        break;
+      case 5:
+        esquemaRutina = torsoPierna_ppl;
+        detalleRutina[0].rutina = torsoPierna_ppl[0].rutina;
+        detalleRutina[1].rutina = torsoPierna_ppl[1].rutina;
+        detalleRutina[2].rutina = torsoPierna_ppl[2].rutina;
+        detalleRutina[3].rutina = torsoPierna_ppl[3].rutina;
+        detalleRutina[4].rutina = torsoPierna_ppl[4].rutina;
+        const nuevoId5 = uuidv4();
+        const rutina5Dias: Rutina = {
+          id: nuevoId5,
+          nombre: "TORSO-PIERNA/PPL ",
+          dias: 6,
+          esquema: esquemaRutina,
+          detalle: detalleRutina,
+        };
+        setRutinasCreadas((prevRutinas) => [...prevRutinas, rutina5Dias]);
         break;
       case 6:
         esquemaRutina = ppl;
@@ -71,7 +108,7 @@ export default function Rutinas() {
         const nuevoId6 = uuidv4();
         const rutina6Dias: Rutina = {
           id: nuevoId6,
-          nombre: "EMPUJE/JALE/PIERNA",
+          nombre: "PPL",
           dias: 6,
           esquema: esquemaRutina,
           detalle: detalleRutina,
@@ -153,7 +190,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#111111",
   },
   container: {
-    //flex: 1,
     alignItems: "flex-start",
     justifyContent: "flex-start",
   },
@@ -163,7 +199,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   textoContainerVacio: {
-    color: "#A9A9A9", // Gris claro para el texto
+    color: "#A9A9A9",
     fontSize: 18,
   },
   addButton: {
@@ -196,10 +232,10 @@ const styles = StyleSheet.create({
   },
   modalView: {
     backgroundColor: "white",
-    borderRadius: 20, // Más suave
+    borderRadius: 20,
     padding: 25,
-    width: "80%", // Ocupa un buen ancho
-    alignItems: "center", // Centra el contenido
+    width: "80%",
+    alignItems: "center",
   },
   modalTitle: {
     marginBottom: 20,
@@ -219,14 +255,6 @@ const styles = StyleSheet.create({
   modalButtonText: {},
   //Estilos rutinas
   card: {
-    // backgroundColor: "#2C2C2C",
-    // margin: 18,
-    // marginBottom: 0,
-    // width: "90%",
-    // height: 100,
-    // borderRadius: 10,
-    // padding: 20,
-
     backgroundColor: "#2C2C2C",
     marginHorizontal: 20,
     marginTop: 20,
@@ -244,13 +272,9 @@ const styles = StyleSheet.create({
     elevation: 8,
 
     padding: 20,
-    justifyContent: "center", // Centra verticalmente el contenido
+    justifyContent: "center",
   },
   cardTitle: {
-    // fontSize: 20,
-    // fontWeight: "bold",
-    // color: "#FFFFFF",
-
     fontSize: 22,
     fontWeight: "700",
     color: "#FFFFFF",

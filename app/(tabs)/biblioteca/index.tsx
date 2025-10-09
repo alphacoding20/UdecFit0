@@ -38,10 +38,9 @@ export default function biblioteca() {
 const styles = StyleSheet.create({
   scroll: {
     flex: 1,
-    //backgroundColor: "yellow",
+    backgroundColor: "#111111",
   },
   container: {
-    flex: 1,
     alignItems: "flex-start",
     justifyContent: "flex-start",
     //backgroundColor: "red",

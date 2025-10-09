@@ -10,8 +10,19 @@ export default function TabLayout() {
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#76B82A",
+          tabBarInactiveTintColor: "#A9A9A9",
           tabBarStyle: {
-            backgroundColor: "white",
+            backgroundColor: "#111111",
+            borderTopColor: "#2C2C2C",
+          },
+          tabBarLabelStyle: {
+            fontSize: 11,
+          },
+          headerStyle: {
+            backgroundColor: "#111111",
+          },
+          headerTitleStyle: {
+            color: "#FFFFFF",
           },
           headerShadowVisible: false,
         }}
@@ -38,7 +49,7 @@ export default function TabLayout() {
           name="biblioteca"
           options={{
             title: "Ejercicios",
-            headerTitle: "Biblioteca de ejercicios",
+            headerTitle: "Grupos Musculares",
             tabBarIcon: ({ color, focused }) => (
               <MaterialCommunityIcons
                 name="bookshelf"

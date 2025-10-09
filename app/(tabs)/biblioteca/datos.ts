@@ -4,6 +4,11 @@ export type Ejercicio = {
   descripcion: string;
 };
 
+export type Esquema = {
+  dia: number;
+  rutina: string[];
+};
+
 //EJERCICIOS
 
 export const ejercicios: Ejercicio[] = [
@@ -105,8 +110,52 @@ export const ejercicios: Ejercicio[] = [
 ];
 
 //RUTINAS
+export const fullBody: Esquema[] = [
+  {
+    dia: 1,
+    rutina: [
+      "Press banca",
+      "Prensa inclinada",
+      "Jalón al pecho",
+      "Curl acostado",
+      "Press militar",
+      "Hip thrust",
+      "Extensiones de codo en polea",
+      "Elevaciones de talón",
+      "Curl de biceps",
+    ],
+  },
+  {
+    dia: 2,
+    rutina: [
+      "Remo en polea baja agarre ancho",
+      "Extensiones de pierna",
+      "Press inclinado",
+      "Peso muerto rumano",
+      "Elevaciones laterales",
+      "Hip thrust",
+      "Extensiones de codo en polea tras nuca",
+      "Elevaciones de talón",
+      "Curl de biceps en banco inclinado",
+    ],
+  },
+  {
+    dia: 3,
+    rutina: [
+      "Peck deck",
+      "Sentadilla hack",
+      "Remo en polea baja",
+      "Curl de femoral acostado",
+      "Peck deck invertido",
+      "Hip thrust",
+      "Extensiones de codo en polea",
+      "Elevaciones de talón",
+      "Curl predicador",
+    ],
+  },
+];
 
-export const torsoPierna = [
+export const torsoPierna: Esquema[] = [
   {
     dia: 1,
     rutina: [
@@ -125,7 +174,7 @@ export const torsoPierna = [
       "Peso muerto rumano",
       "Hip Thrust",
       "Extensiones de pierna",
-      "Curl acostado",
+      "Curl de femoral acostado",
       "Elevaciones de talón",
     ],
   },
@@ -147,13 +196,13 @@ export const torsoPierna = [
       "Peso muerto rumano",
       "Hip Thrust",
       "Extensiones de pierna",
-      "Curl acostado",
+      "Curl de femoral acostado",
       "Elevaciones de talón",
     ],
   },
 ];
 
-export const ppl = [
+export const ppl: Esquema[] = [
   {
     dia: 1,
     rutina: [
@@ -170,7 +219,7 @@ export const ppl = [
     rutina: [
       "Jalón al pecho",
       "Remo en polea baja",
-      "Curl inclinado",
+      "Curl de biceps en banco inclinado",
       "Curl predicador",
       "Peck deck invertido",
       "Curl invertido",
@@ -183,7 +232,7 @@ export const ppl = [
       "Peso muerto rumano",
       "Hip Thrust",
       "Extensiones de pierna",
-      "Curl acostado",
+      "Curl de femoral acostado",
       "Elevaciones de talón",
     ],
   },
@@ -203,7 +252,7 @@ export const ppl = [
     rutina: [
       "Jalón al pecho",
       "Remo en polea baja",
-      "Curl inclinado",
+      "Curl de biceps en banco inclinado",
       "Curl predicador",
       "Peck deck invertido",
       "Curl invertido",
@@ -216,7 +265,66 @@ export const ppl = [
       "Peso muerto rumano",
       "Hip Thrust",
       "Extensiones de pierna",
-      "Curl acostado",
+      "Curl de femoral acostado",
+      "Elevaciones de talón",
+    ],
+  },
+];
+
+export const torsoPierna_ppl: Esquema[] = [
+  {
+    dia: 1,
+    rutina: [
+      "Press banca",
+      "Press militar",
+      "Jalón al pecho",
+      "Extensiones de codo",
+      "Curl de biceps",
+      "Elevaciones laterales",
+    ],
+  },
+  {
+    dia: 2,
+    rutina: [
+      "Prensa inclinada",
+      "Peso muerto rumano",
+      "Hip Thrust",
+      "Extensiones de pierna",
+      "Curl de femoral acostado",
+      "Elevaciones de talón",
+    ],
+  },
+  {
+    dia: 3,
+    rutina: [
+      "Press banca",
+      "Extensiones de codo en polea",
+      "Elevaciones laterales",
+      "Press inclinado",
+      "Extensiones de codo en polea tras nuca",
+      "Encogimientos de hombro",
+    ],
+  },
+  {
+    dia: 4,
+    rutina: [
+      "Remo en polea baja",
+      "Curl de biceps en banco inclinado",
+      "Peck deck invertido",
+      "Flexión de muñeca",
+      "Curl invertido",
+      "Jalón al pecho con agarre neutro",
+      "Curl predicador",
+    ],
+  },
+  {
+    dia: 5,
+    rutina: [
+      "Prensa inclinada",
+      "Peso muerto rumano",
+      "Hip Thrust",
+      "Extensiones de pierna",
+      "Curl de femoral acostado",
       "Elevaciones de talón",
     ],
   },

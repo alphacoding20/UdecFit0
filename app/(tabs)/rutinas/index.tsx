@@ -1,5 +1,6 @@
 //Imports
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Modal,
@@ -15,19 +16,23 @@ import {
   ppl,
   torsoPierna,
   torsoPierna_ppl,
-} from "./biblioteca/datos";
+} from "../biblioteca/datos";
 
 //Este tipe sirve para especificar lo que hay que pasar al crear la rutina
 type Rutina = {
   id: string;
   nombre: string;
   dias: number;
+  esquemaId: string;
   esquema: any[];
   detalle: any[];
 };
 
 //Función principal
 export default function Rutinas() {
+  //Inicialización del router (este hook sirve para navegar entre pantallas)
+  const router = useRouter();
+
   //Almacenamiento de rutinas
   const [rutinasCreadas, setRutinasCreadas] = useState<Rutina[]>([]);
   let esquemaRutina = [];
@@ -50,6 +55,7 @@ export default function Rutinas() {
   const seleccionDias = (dias: number) => {
     switch (dias) {
       case 3:
+        //esquemaId = "fullBody";
         esquemaRutina = fullBody;
         detalleRutina[0].rutina = fullBody[0].rutina;
         detalleRutina[1].rutina = fullBody[1].rutina;
@@ -59,6 +65,7 @@ export default function Rutinas() {
           id: nuevoId3,
           nombre: "FULLBODY",
           dias: 3,
+          esquemaId: "fullBody",
           esquema: esquemaRutina,
           detalle: detalleRutina,
         };
@@ -75,6 +82,7 @@ export default function Rutinas() {
           id: nuevoId4,
           nombre: "TORSO-PIERNA",
           dias: 4,
+          esquemaId: "torsoPierna",
           esquema: esquemaRutina,
           detalle: detalleRutina,
         };
@@ -92,6 +100,7 @@ export default function Rutinas() {
           id: nuevoId5,
           nombre: "TORSO-PIERNA/PPL ",
           dias: 5,
+          esquemaId: "torsoPierna_ppl",
           esquema: esquemaRutina,
           detalle: detalleRutina,
         };
@@ -110,6 +119,7 @@ export default function Rutinas() {
           id: nuevoId6,
           nombre: "PPL",
           dias: 6,
+          esquemaId: "ppl",
           esquema: esquemaRutina,
           detalle: detalleRutina,
         };
@@ -130,7 +140,15 @@ export default function Rutinas() {
         {rutinasCreadas.length > 0 ? (
           rutinasCreadas.map((rutina) => (
             <View style={styles.container} key={rutina.id}>
-              <Pressable style={styles.card}>
+              <Pressable
+                style={styles.card}
+                onPress={() =>
+                  router.push({
+                    pathname: `/rutinas/${rutina.id}` as any,
+                    params: { id: rutina.id, esquema: rutina.esquemaId },
+                  })
+                }
+              >
                 <Text style={styles.cardTitle}>{rutina.nombre}</Text>
                 <Text style={styles.cardText}>{rutina.dias} dias</Text>
               </Pressable>

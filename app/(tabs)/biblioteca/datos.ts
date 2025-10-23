@@ -329,3 +329,11 @@ export const torsoPierna_ppl: Esquema[] = [
     ],
   },
 ];
+
+//Esto es para poder acceder a los arreglos de rutinas desde [id].tsx
+export const ESQUEMAS_DATOS = {
+  fullBody: fullBody,
+  torsoPierna: torsoPierna,
+  ppl: ppl,
+  torsoPierna_ppl: torsoPierna_ppl,
+};

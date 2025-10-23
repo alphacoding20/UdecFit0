@@ -91,7 +91,7 @@ export default function Rutinas() {
         const rutina5Dias: Rutina = {
           id: nuevoId5,
           nombre: "TORSO-PIERNA/PPL ",
-          dias: 6,
+          dias: 5,
           esquema: esquemaRutina,
           detalle: detalleRutina,
         };

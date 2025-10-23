@@ -14,6 +14,8 @@ export default function PantallaEjercicios() {
 
   return (
     <FlatList
+      style={styles.listContainer}
+      contentContainerStyle={styles.contentContainer}
       data={ejerciciosCategoria}
       keyExtractor={(item) => item.nombre}
       renderItem={({ item }) => (
@@ -28,16 +30,33 @@ export default function PantallaEjercicios() {
 }
 
 const styles = StyleSheet.create({
+  listContainer: {
+    flex: 1,
+    backgroundColor: "#111111",
+  },
+  contentContainer: {
+    paddingVertical: 12,
+  },
   card: {
-    backgroundColor: "#FDFD96",
-    margin: 18,
-    marginBottom: 0,
-    width: "90%",
-    height: 100,
+    backgroundColor: "#2C2C2C",
+    marginHorizontal: 20,
+    marginVertical: 8,
+    height: 80, //
     borderRadius: 10,
     padding: 20,
+    justifyContent: "center",
+
+    // Sombra Android
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    // Sombra iOS
+    elevation: 4,
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#FFFFFF",
   },
 });

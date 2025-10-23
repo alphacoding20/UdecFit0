@@ -41,20 +41,37 @@ const styles = StyleSheet.create({
     backgroundColor: "#111111",
   },
   container: {
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    // alignItems: "flex-start",
+    // justifyContent: "flex-start",
     //backgroundColor: "red",
   },
   card: {
-    backgroundColor: "palegreen",
-    margin: 18,
-    marginBottom: 0,
-    width: "90%",
-    height: 100,
-    borderRadius: 10,
-    padding: 20,
+    backgroundColor: "#2C2C2C",
+    width: "47%",
+    height: 120,
+    marginVertical: 10,
+    marginHorizontal: 5,
+    borderRadius: 15,
+    padding: 15,
+    justifyContent: "flex-end",
+
+    //Sombra para Android
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+
+    //Sombra para iOS
+    elevation: 6,
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#FFFFFF",
   },
 });
